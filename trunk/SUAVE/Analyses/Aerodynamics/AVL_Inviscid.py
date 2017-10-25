@@ -121,8 +121,16 @@ class AVL_Inviscid(Aerodynamics):
         run_folder   = self.settings.filenames.run_folder
         
         # Sample training data
-        self.sample_training()
-    
+        print_output = False
+        if print_output == False:
+            devnull = open(os.devnull,'w')
+            sys.stdout = devnull    
+            
+        self.sample_training()      
+        
+        if print_output == False:
+            sys.stdout = sys.__stdout__        
+   
         # Build surrogate
         self.build_surrogate()
 
